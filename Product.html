@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2 {
+            text-align: center;
+        }
+        h1 {
+            color: #708090; /* Change this to your desired color */
+        }
+        
+        .login-container, .home-container {
+            display: none;
+            background-color: #2E4053;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav{
+            margin:0 15px;
+            color: blue;
+            text-decoration:none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        button {
+            background-color: grey;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            background: #212121;
+            padding: 0.01rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.1rem 1rem;
+            display: block;
+            font-weight: bold;
+            transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        nav a:hover {
+            color: #CCCCCC;
+            background: #ff9900;
+            transform: scale(1.05);
+        }
+        
+        /* Filter Buttons */
+#filters button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#filters button:hover {
+    background-color: #0056b3;
+}
+
+/* Click effect */
+#filters button:active {
+    transform: scale(0.96);
+    background-color: #004494;
+}
+
+/* Active filter style */
+#filters button.active-filter {
+    background-color: #004494;
+    box-shadow: 0 0 0 2px #80bdff;
+}
+
+        
+        
+        #filters button:hover {
+            background-color:#filters button:hover {
+    background-color:#6A5ACD ; 
+}
+ ;
+        }
+        
+        /* Product grid styling */
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .product {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+        
+        .product img {
+            width: 100%;
+        }
+        
+        .cart {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Login Form -->
+    <div class="container login-container active" id="loginForm">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Enter Username">
+        <button id="generateOtpBtn">Generate OTP</button>
+        <p id="otpDisplay"></p>
+        <input type="number" id="otpInput" placeholder="Enter OTP">
+        <button id="validateOtpBtn">Validate</button>
+        <p id="error" class="error" style="color: red;"></p>
+    </div>
+    
+    <!-- Home Page -->
+    <div class="container home-container" id="homePage">
+        <h1>Welcome to the page, <span id="usernameDisplay" style="color: #708090;"></span></h1>
+        <h2>Product List</h2>
+        
+        <!-- Filter Buttons -->
+        <div id="filters">
+            <button onclick="filterProducts('All')">All</button>
+            <button onclick="filterProducts('Smartphones')">Smartphones</button>
+            <button onclick="filterProducts('Laptops')">Laptops</button>
+            <button onclick="filterProducts('Accessories')">Accessories</button>
+        </div>
+
+        <div class="products">
+            <div class="product" data-category="Laptops">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfRdwXqb4qAyf-tUqEObM55cPldPlrNBtqqSY7QHKMssHXH7-DDQ8PljGX&s=10" alt="Product 1">
+                <h3>Laptops</h3>
+                <p>Price: ₹69999</p>
+                <button onclick="addToCart('Laptops', 69999)">Add to Cart</button>
+            </div>
+            <div class="product" data-category="Smartphones">
+                <img src="https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80" alt="Product 2">
+                <h3>Smartphones</h3>
+                <p>Price: ₹16999</p>
+                <button onclick="addToCart('Smartphones', 16999)">Add to Cart</button>
+            </div>
+            <div class="product" data-category="Accessories">
+                <img src="https://m.media-amazon.com/images/I/616fdRSET7L._AC_UF1000,1000_QL80_.jpg" alt="Product 3">
+                <h3>Accessories</h3>
+                <p>Price: ₹1499</p>
+                <button onclick="addToCart('Accessories', 1499)">Add to Cart</button>
+            </div>
+            <div class="product" data-category="Accessories">
+                <img src="https://m.media-amazon.com/images/I/71yEX4ugtJL._AC_UF1000,1000_QL80_.jpg" alt="Product 4">
+                <h3>Accessories - Wireless Charger</h3>
+                <p>Price: ₹999</p>
+                <button onclick="addToCart('Wireless Charger', 999)">Add to Cart</button>
+            </div>
+
+            
+            <!-- Add more products as needed with the appropriate data-category attribute -->
+        </div>
+
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cartItems"></ul>
+            <h3>Total Price: ₹<span id="totalPrice">0</span></h3>
+        </div>
+    </div>
+
+    <script>
+        let generatedOtp;
+        let cart = [];
+        let totalPrice = 0;
+
+        // Generate OTP
+        document.getElementById('generateOtpBtn').addEventListener('click', function () {
+            generatedOtp = Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('otpDisplay').innerText = 'OTP: ' + generatedOtp;
+        });
+
+        // Validate OTP and show Home Page
+        document.getElementById('validateOtpBtn').addEventListener('click', function () {
+            const enteredOtp = document.getElementById('otpInput').value;
+            const username = document.getElementById('username').value;
+
+            if (enteredOtp == generatedOtp && username !== "") {
+                document.getElementById('usernameDisplay').innerText = username;
+                document.getElementById('loginForm').classList.remove('active');
+                document.getElementById('homePage').classList.add('active');
+            } else {
+                document.getElementById('error').innerText = 'Incorrect OTP or Username is empty. Please try again.';
+            }
+        });
+
+        // Add to Cart
+        function addToCart(productName, productPrice) {
+            cart.push({ name: productName, price: productPrice });
+            totalPrice += productPrice;
+            displayCart();
+        }
+
+        // Display Cart Items
+        function displayCart() {
+            const cartItems = document.getElementById('cartItems');
+            cartItems.innerHTML = ''; // Clear previous items
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.innerText = `${item.name} - ₹${item.price}`;
+                cartItems.appendChild(li);
+            });
+            document.getElementById('totalPrice').innerText = totalPrice;
+        }
+
+        // Filter Products by Category
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'All' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
